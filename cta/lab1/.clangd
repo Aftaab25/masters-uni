@@ -1,0 +1,5 @@
+CompileFlags:
+  Add:
+    - -I/usr/include/python3.12
+    - -I/home/batman/.local/lib/python3.12/site-packages/numpy/_core/include
+

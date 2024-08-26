@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #include "matplotlibcpp.h"
+
 using namespace std;
 namespace plt = matplotlibcpp;
 
@@ -55,14 +56,37 @@ vector<vector<int>> getRandomNumberArr(int min, int max) {
     return res;
 } 
 
-// Bubble sort
-void bubble_sort(vector<int>& arr) {
-    for (int i=0; i<arr.size()-1; i++){
-        for (int j=arr.size()-1; j>=i; j--) {
-            if (arr[j-1] > arr[j]) swap(arr[i], arr[j]);
+int partition(vector<int>& arr, int low, int high) {
+    int pivot = arr[low];
+    int i = low;
+    int j = high;
+
+    while (i<j) {
+        while (arr[i] <= pivot && i <= high - 1) {
+            i++;
+        }
+    
+        while (arr[j] > pivot && j > low) {
+            j--;
+        }
+    
+        if (i < j) {
+            swap(arr[i], arr[j]);
         }
     }
+
+    swap(arr[low], arr[j]);
+    return j;
 }
+
+void quick_sort(vector<int>& arr, int low, int high) {
+    if (low < high) {
+        int pivotIdx = partition(arr, low, high);
+        quick_sort(arr, low, pivotIdx - 1);
+        quick_sort(arr, pivotIdx + 1, high);
+    }
+}
+
 
 int main() {
     
@@ -81,7 +105,7 @@ int main() {
         for (vector<int> array: inputArrays) {
             orderCount++;
             auto start = chrono::high_resolution_clock::now();
-            bubble_sort(array);
+            quick_sort(array, 0, array.size()-1);
             auto end = chrono::high_resolution_clock::now();
 
             chrono::duration<double> duration = end - start;
