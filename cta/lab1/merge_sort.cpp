@@ -53,96 +53,80 @@ vector<vector<int>> getRandomNumberArr(int min, int max) {
     return res;
 } 
 
-// Bubble sort
-void bubble_sort(vector<int>& arr) {
-    for (int i=0; i<arr.size()-1; i++){
-        for (int j=arr.size()-1; j>=i; j--) {
-            if (arr[j-1] > arr[j]) swap(arr[i], arr[j]);
+void merge(vector<int>& arr, int low,int mid , int high) {
+    vector<int> temp;
+    int l = low;
+    int r = mid+1;
+
+    while (l <= mid && r <= high) {
+        if (arr[l] <= arr[r]) {
+            temp.emplace_back(arr[l]);
+            l++;
+        }
+        else {
+            temp.emplace_back(arr[r]);
+            r++;
         }
     }
-}
 
-// Selection Sort
-void selection_sort(vector<int>& arr) {
-    int min_;
-    for (int i=0; i<arr.size()-1; i++){
-        min_ = i;
-        for (int j=i+1; j<arr.size(); j++) {
-            if (arr[j] < arr[min_]) {
-                min_ = j;
-            }
-        }
-        if (min_ != i) {
-            swap(arr[i], arr[min_]);
-        }
+    // if left is stell left
+    while(l <= mid) {
+        temp.emplace_back(arr[l]);
+        l++;
     }
-}
-
-// Insertion Sort
-void insertion_sort(vector<int>& arr) {
-    for (int i=1; i<arr.size(); i++){
-        int x = i-1;
-        int key = arr[i];
-        while(x>=0 && arr[x] > key) {
-            arr[x+1] = arr[x];
-            x--;
-        }
-        arr[x+1] = key;
-    }
-}
-
-// Partitioning for Quick Sort
-int partition(vector<int>& arr, int low, int high) {
-    int pivot = arr[low];
-    int i = low;
-    int j = high;
-
-    while (i<j) {
-        while (i <= high && arr[i] <= pivot) {
-            i++;
-        }
     
-        while (arr[j] > pivot) {
-            j--;
-        }
+    // if right is still left
+    while(r <= high) {
+        temp.emplace_back(arr[r]);
+        r++;
+    }
     
-        if (i < j) {
-            swap(arr[i], arr[j]);
-        }
+    for (int i=low; i<=high; i++) {
+        arr[i] = temp[i-low];
     }
 
-    swap(arr[low], arr[j]);
-    return j;
 }
 
-// Quick Sort
-void quick_sort(vector<int>& arr, int low, int high) {
-    if (low < high) {
-        int pivotIdx = partition(arr, low, high);
-        quick_sort(arr, low, pivotIdx - 1);
-        quick_sort(arr, pivotIdx + 1, high);
+
+/*
+ * Merge Sort Logic:
+ * if low >= high: return
+ * Find the mid-point using low and high
+ * merge each sorted half of the array using merge()
+*/
+void merge_sort(vector<int>& arr, int low, int high) {
+    if (low >= high) {
+        return;
     }
+    int mid = (low + high) / 2;
+    merge_sort(arr, low, mid);
+    merge_sort(arr, mid+1, high);
+
+    merge(arr, low, mid, high);
+}
+
+// TODO: Implement this
+void merge_sort_external(vector<int>& arr, int low, int high) {
+    return;
 }
 
 void displayMenu() {
     cout << "Choose a sorting algorithm:" << endl;
-    cout << "1. Bubble Sort" << endl;
-    cout << "2. Insertion Sort" << endl;
-    cout << "3. Selection Sort" << endl;
-    cout << "4. Quick Sort" << endl;
+    cout << "1. Merge Sort" << endl;
+    cout << "2. External Merge Sort" << endl;
 }
 
 int getUserChoice() {
     int choice;
     while (true) {
-        cout << "Enter the number corresponding to your choice (1-4): ";
+        cout << "Enter the number corresponding to your choice (1-2): ";
         cin >> choice;
 
         // Check if the input is an integer and within the valid range
-        if (cin.fail() || choice < 1 || choice > 4) {
+        if (cin.fail() || choice < 1 || choice > 2) {
             cin.clear(); // Clear the error flag
             cin.ignore(10000, '\n'); // Discard invalid input
-            cout << "Invalid choice. Please enter a number between 1 and 4." << endl;
+            cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
         } else {
             break; // Valid choice, break the loop
         }
@@ -172,16 +156,10 @@ int main() {
             auto start = chrono::high_resolution_clock::now();
             switch (userChoice) {
                 case 1:
-                    bubble_sort(array);
+                    merge_sort(array, 0, array.size()-1);
                     break;
                 case 2:
-                    insertion_sort(array);
-                    break;
-                case 3:
-                    selection_sort(array);
-                    break;
-                case 4:
-                    quick_sort(array, 0, array.size()-1);
+                    merge_sort_external(array, 0, array.size()-1);
                     break;
                 default:
                     cout << "Error." << endl;
@@ -207,7 +185,7 @@ int main() {
                     break;
             }
                     
-            cout << "Execution time: for " << order_type << " : " << duration.count() << " seconds" << endl;
+            cout << "Execution time for " << order_type << " (array size " << array.size() << ") : " << duration.count() << " seconds" << endl;
 
         }
         cout << "-------------------------------" << nline;
