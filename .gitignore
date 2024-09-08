@@ -61,3 +61,5 @@ dkms.conf
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+
+.ipynb_checkpoints/
