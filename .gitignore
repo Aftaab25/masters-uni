@@ -63,3 +63,4 @@ pyvenv.cfg
 pip-selfcheck.json
 
 .ipynb_checkpoints/
+*.swp
