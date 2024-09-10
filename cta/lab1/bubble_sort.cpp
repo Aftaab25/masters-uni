@@ -57,7 +57,7 @@ vector<vector<int>> getRandomNumberArr(int min, int max) {
 void bubble_sort(vector<int>& arr) {
     for (int i=0; i<arr.size()-1; i++){
         for (int j=arr.size()-1; j>=i; j--) {
-            if (arr[j-1] > arr[j]) swap(arr[i], arr[j]);
+            if (arr[j-1] > arr[j]) swap(arr[j-1], arr[j]);
         }
     }
 }

@@ -105,10 +105,6 @@ void merge_sort(vector<int>& arr, int low, int high) {
     merge(arr, low, mid, high);
 }
 
-// TODO: Implement this
-void merge_sort_external(vector<int>& arr, int low, int high) {
-    return;
-}
 
 void displayMenu() {
     cout << "Choose a sorting algorithm:" << endl;
