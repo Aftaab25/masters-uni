@@ -1,0 +1,5 @@
+/home/batman/masters-uni/hpca/prac_1/cmake-build-debug/CMakeFiles/prac_1.dir
+/home/batman/masters-uni/hpca/prac_1/cmake-build-debug/CMakeFiles/threading.dir
+/home/batman/masters-uni/hpca/prac_1/cmake-build-debug/CMakeFiles/row_wise.dir
+/home/batman/masters-uni/hpca/prac_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/batman/masters-uni/hpca/prac_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

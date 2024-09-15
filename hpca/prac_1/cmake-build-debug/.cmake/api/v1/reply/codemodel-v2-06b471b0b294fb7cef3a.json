@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "prac_1",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "prac_1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prac_1-Debug-d81aeecc734316f81c0b.json",
+					"name" : "prac_1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "row_wise::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-row_wise-Debug-a6028dafec97e53c8834.json",
+					"name" : "row_wise",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "threading::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-threading-Debug-83c1514caeb8d2b971c5.json",
+					"name" : "threading",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/batman/masters-uni/hpca/prac_1/cmake-build-debug",
+		"source" : "/home/batman/masters-uni/hpca/prac_1"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
