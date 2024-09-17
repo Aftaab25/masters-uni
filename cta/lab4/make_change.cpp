@@ -37,13 +37,25 @@ int main() {
     int totalAmount;
     cout << "Enter the total Amount: ";
     cin >> totalAmount;
+
+    if (totalAmount < 0) {
+        cout << "No change is available for amount lesser than 0" << endl;
+        return 0;
+    }
+
     vector<int> denominations;
     unordered_map<int, int> result;
 
     cout << "Enter the denominations: " << nline;
 
     do {
-        int x; cin >> x; denominations.push_back(x);
+        int x; cin >> x; 
+        if (x < 0) {
+            cout << "Negative Denomination is not possible!" << nline;
+            return 0;
+        }
+
+        denominations.push_back(x);
     } while  ( cin.get() != '\n');
 
     set<int> denominationsSet(denominations.begin(), denominations.end());
