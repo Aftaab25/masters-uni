@@ -106,34 +106,34 @@ void merge_sort(vector<int>& arr, int low, int high) {
 }
 
 
-void displayMenu() {
-    cout << "Choose a sorting algorithm:" << endl;
-    cout << "1. Merge Sort" << endl;
-    cout << "2. External Merge Sort" << endl;
-}
+// void displayMenu() {
+//     cout << "Choose a sorting algorithm:" << endl;
+//     cout << "1. Merge Sort" << endl;
+//     cout << "2. External Merge Sort" << endl;
+// }
 
-int getUserChoice() {
-    int choice;
-    while (true) {
-        cout << "Enter the number corresponding to your choice (1-2): ";
-        cin >> choice;
+// int getUserChoice() {
+//     int choice;
+//     while (true) {
+//         cout << "Enter the number corresponding to your choice (1-2): ";
+//         cin >> choice;
 
-        // Check if the input is an integer and within the valid range
-        if (cin.fail() || choice < 1 || choice > 2) {
-            cin.clear(); // Clear the error flag
-            cin.ignore(10000, '\n'); // Discard invalid input
-            cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
-        } else {
-            break; // Valid choice, break the loop
-        }
-    }
-    return choice;
-}
+//         // Check if the input is an integer and within the valid range
+//         if (cin.fail() || choice < 1 || choice > 2) {
+//             cin.clear(); // Clear the error flag
+//             cin.ignore(10000, '\n'); // Discard invalid input
+//             cout << "Invalid choice. Please enter a number between 1 and 2." << endl;
+//         } else {
+//             break; // Valid choice, break the loop
+//         }
+//     }
+//     return choice;
+// }
 
 int main() {
     
-    displayMenu();
-    int userChoice = getUserChoice();
+    // displayMenu();
+    // int userChoice = getUserChoice();
 
     int min = 1;
 
@@ -150,20 +150,12 @@ int main() {
         for (vector<int> array: inputArrays) {
             orderCount++;
             auto start = chrono::high_resolution_clock::now();
-            switch (userChoice) {
-                case 1:
-                    merge_sort(array, 0, array.size()-1);
-                    break;
-                case 2:
-                    merge_sort_external(array, 0, array.size()-1);
-                    break;
-                default:
-                    cout << "Error." << endl;
-                    break;
-            }
+            merge_sort(array, 0, array.size()-1);
             auto end = chrono::high_resolution_clock::now();
 
             chrono::duration<double> duration = end - start;
+
+            // printArr(array);
 
             string order_type;
             switch(orderCount) {

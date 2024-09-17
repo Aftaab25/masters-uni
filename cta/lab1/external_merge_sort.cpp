@@ -120,6 +120,60 @@ vector<int> merge_k_sorted_vectors(const vector<int>& vector1, const vector<int>
 
 }
 
+void external_merge_k_sorted_files(const vector<string>& chunk_files, const string& output_file) {
+    vector<ifstream> files(chunk_files.size());
+    vector<int> current_vals(chunk_files.size(), numeric_limits<int>::max());
+    vector<bool> file_exhausted(chunk_files.size(), false);  // To track if the file is completely read
+
+    // Open each chunk file and initialize the first values
+    for (int i = 0; i < chunk_files.size(); ++i) {
+        files[i].open(chunk_files[i]);
+        if (files[i] >> current_vals[i]) {
+            // Successfully read the first element from each file
+        } else {
+            file_exhausted[i] = true;  // Mark file as exhausted if empty
+        }
+    }
+
+    ofstream outfile(output_file);
+
+    // Merge process until all files are exhausted
+    while (true) {
+        int min_value = numeric_limits<int>::max();
+        int min_index = -1;
+
+        // Find the smallest current value
+        for (int i = 0; i < current_vals.size(); ++i) {
+            if (!file_exhausted[i] && current_vals[i] < min_value) {
+                min_value = current_vals[i];
+                min_index = i;
+            }
+        }
+
+        // If all files are exhausted, break
+        if (min_index == -1) {
+            break;
+        }
+
+        // Write the smallest element to the output file
+        outfile << min_value << " ";
+
+        // Advance the pointer for the file that had the smallest element
+        if (files[min_index] >> current_vals[min_index]) {
+            // Successfully read the next element
+        } else {
+            file_exhausted[min_index] = true;  // Mark this file as exhausted if no more elements
+        }
+    }
+
+    // Close all files
+    for (int i = 0; i < chunk_files.size(); ++i) {
+        files[i].close();
+    }
+
+    outfile.close();
+}
+
 /*
  * Merge Sort Logic:
  * if low >= high: return
@@ -159,7 +213,7 @@ vector<int> read_file(const string& filename) {
     return data;
 }
 
-void external_merge_sort(vector<int>& arr, int no_of_chunks, int size_of_array, int orderType) {
+int external_merge_sort(vector<int>& arr, int chunk_size, int size_of_array, int orderType) {
 
     /*
      * orderType: 1 => Ascending Order
@@ -180,7 +234,12 @@ void external_merge_sort(vector<int>& arr, int no_of_chunks, int size_of_array, 
             break;
     }
 
-    int chunk_size = arr.size() / no_of_chunks;
+    // int chunk_size = arr.size() / no_of_chunks;
+    int no_of_chunks = ceil((double) arr.size() / chunk_size);
+    if (no_of_chunks > chunk_size) {
+        cout << "No. of chunks created is greater than the chunk size, hence External Merge Sort not possible!" << nline;
+        return 0;
+    }
 
     // Split the array into chunks and write to files
     for (int i = 0; i < no_of_chunks; i++) {
@@ -207,31 +266,26 @@ void external_merge_sort(vector<int>& arr, int no_of_chunks, int size_of_array, 
     }
 
     // Merge them files.
-    vector<int> result;
+    vector<string> chunk_files;
     for (int i=0; i < no_of_chunks; ++i) {
-        // string filename = "chunks/chunk_" + to_string(i + 1) + "_" + to_string(size_of_array) + ".txt";
         string filename = "chunks/" + to_string(size_of_array) + "_" + order_type + "_chunk_" + to_string(i + 1) + ".txt";
-
-        // Read data from the file
-        vector<int> data = read_file(filename);
-        result = merge_k_sorted_vectors(result, data);
+        chunk_files.push_back(filename);
     }
 
-    // Write the result array into the output file
-    // string output_file_name = "chunks/output_file.txt";
+    // Output merged result to a file
     string output_file_name = "chunks/output_" + to_string(size_of_array) + "_" + order_type + ".txt";
-    write_chunk_to_file(output_file_name, result);
+    external_merge_k_sorted_files(chunk_files, output_file_name);
 
-    return;
+    return 1;
 }
 
 int main() {
     
-    int no_of_chunks;
+    int chunk_size;
     int min = 1;
 
-    cout << "Enter the value for number of chunks: ";
-    cin >> no_of_chunks;
+    cout << "Maximum number elements in a memory chunk: ";
+    cin >> chunk_size;
 
     vector<int> input_ranges = {10000, 50000, 100000};
 
@@ -246,8 +300,9 @@ int main() {
         for (vector<int> array: inputArrays) {
             orderCount++;
             auto start = chrono::high_resolution_clock::now();
-            external_merge_sort(array, no_of_chunks, array.size(), orderCount);
+            external_merge_sort(array, chunk_size, array.size(), orderCount);
             auto end = chrono::high_resolution_clock::now();
+            // if (check == 0) return 0;
 
             chrono::duration<double> duration = end - start;
 

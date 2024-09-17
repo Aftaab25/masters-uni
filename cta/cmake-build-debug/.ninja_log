@@ -1,0 +1,7 @@
+# ninja log v6
+3	1632	1726526941665939478	CMakeFiles/cta.dir/lab1/selection_sort.cpp.o	508352ea9bc0ac6a
+1	1820	1726526941663939513	CMakeFiles/cta.dir/lab1/bubble_sort.cpp.o	3131fea309ca6136
+1	1959	1726526941663939513	CMakeFiles/cta.dir/lab1/external_merge_sort.cpp.o	1c0d00294ee15921
+2	1969	1726526941664939496	CMakeFiles/cta.dir/lab1/insertion_sort.cpp.o	89484ecd44872fa6
+1	1739	1726527270358222341	CMakeFiles/ExternalMergeSort.dir/lab1/external_merge_sort.cpp.o	4ef0011a9d918001
+1740	1829	1726527272097192094	ExternalMergeSort	1eae2ebd9f9a0a14

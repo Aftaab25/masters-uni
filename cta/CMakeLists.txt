@@ -1,0 +1,1 @@
+add_executable(ExternalMergeSort lab1/external_merge_sort.cpp)
