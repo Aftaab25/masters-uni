@@ -20,7 +20,7 @@ int getRandNo(int min, int max) {
     return dist(gen);
 }
 
-int solve(set<int> denominationsSet, int& totalAmount, unordered_map<int, int>& result) {
+int solve(set<int, greater<int>> denominationsSet, int& totalAmount, unordered_map<int, int>& result) {
 
     for (const int value: denominationsSet) {
         int count = totalAmount/value;
@@ -58,7 +58,7 @@ int main() {
         denominations.push_back(x);
     } while  ( cin.get() != '\n');
 
-    set<int> denominationsSet(denominations.begin(), denominations.end());
+    set<int, greater<int>> denominationsSet(denominations.begin(), denominations.end());
 
     int valid = solve(denominationsSet, totalAmount, result);
 
