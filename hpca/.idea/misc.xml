@@ -9,6 +9,7 @@
   <component name="CMakePythonSetting">
     <option name="pythonIntegrationState" value="YES" />
   </component>
-  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
-  <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK" />
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/prac_1">
+    <contentRoot DIR="$PROJECT_DIR$" />
+  </component>
 </project>

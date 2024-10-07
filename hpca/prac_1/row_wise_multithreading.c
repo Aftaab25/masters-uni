@@ -63,6 +63,11 @@ int main()
         }
     }
 
+    printf("Assigned Random Values to Matrix A\n");
+    printf("Assigned Random Values to Matrix B\n");
+
+    printf("Calculating Matrix Multiplication: AxB\n");
+
     clock_t t = clock();
 
     pthread_t threads[MAX_THREADS];
@@ -84,17 +89,6 @@ int main()
 
     t = clock() - t;
     const double time_taken = (double)t / CLOCKS_PER_SEC; // in seconds
-
-
-    printf("Resultant matrix:\n");
-    for (unsigned int i = 0; i < n; ++i)
-    {
-        for (unsigned int j = 0; j < n; ++j)
-        {
-            printf("%u ", ans[i][j]);
-        }
-        printf("\n");
-    }
 
     printf("matrix multiplication took %f seconds to execute \n", time_taken);
 

@@ -66,24 +66,10 @@ int main(){
 		}
 	}
 
-	printf("============\n");
+	printf("Assigned Random Values to Matrix A\n");
+	printf("Assigned Random Values to Matrix B\n");
 
-	for (unsigned int i=0; i<n; ++i) {
-		for (unsigned int j=0; j<n; ++j) {
-			printf("%llu ", arr1[i][j]);
-		}
-		printf("\n");
-	}
-
-	printf("============\n");
-
-	for (unsigned int i=0; i<n; ++i) {
-		for (unsigned int j=0; j<n; ++j) {
-			printf("%llu ", arr2[i][j]);
-		}
-		printf("\n");
-	}
-	printf("============\n");
+	printf("Calculating Matrix Multiplication: AxB\n");
 
 	clock_t t;
     t = clock();
@@ -100,17 +86,6 @@ int main(){
 
 	t = clock() - t;
     double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-
-	printf("============\n");
-
-
-	for (unsigned int i=0; i<n; ++i) {
-		for (unsigned int j=0; j<n; ++j) {
-			printf("%llu ", ans[i][j]);
-		}
-		printf("\n");
-	}
-	printf("============\n");
 
 	printf("matrix multiplication took %f seconds to execute \n", time_taken);
 

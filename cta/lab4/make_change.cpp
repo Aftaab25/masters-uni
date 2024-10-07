@@ -46,7 +46,7 @@ int main() {
     vector<int> denominations;
     unordered_map<int, int> result;
 
-    cout << "Enter the denominations: " << nline;
+    cout << "Enter the denominations (Space-separated): " << nline;
 
     do {
         int x; cin >> x; 
